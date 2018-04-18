@@ -190,46 +190,43 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Controllers\cursistsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\schipklassesController.cs" />
-    <Compile Include="Controllers\schipsController.cs" />
-    <Compile Include="Controllers\soortcursusController.cs" />
+    <Compile Include="Controllers\SchipController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\cursist.cs">
-      <DependentUpon>DBModels.tt</DependentUpon>
+      <DependentUpon>ZeilschoolDataModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\cursus.cs">
-      <DependentUpon>DBModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DBModels.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DBModels.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DBModels.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DBModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DBModels.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DBModels.edmx</DependentUpon>
+      <DependentUpon>ZeilschoolDataModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\schip.cs">
-      <DependentUpon>DBModels.tt</DependentUpon>
+      <DependentUpon>ZeilschoolDataModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\schipklasse.cs">
-      <DependentUpon>DBModels.tt</DependentUpon>
+      <DependentUpon>ZeilschoolDataModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\soortcursus.cs">
-      <DependentUpon>DBModels.tt</DependentUpon>
+      <DependentUpon>ZeilschoolDataModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\werknemers.cs">
-      <DependentUpon>DBModels.tt</DependentUpon>
+      <DependentUpon>ZeilschoolDataModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ZeilschoolDataModels.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ZeilschoolDataModels.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ZeilschoolDataModels.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ZeilschoolDataModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ZeilschoolDataModels.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ZeilschoolDataModels.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -240,15 +237,15 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\DBModels.Context.tt">
+    <Content Include="Models\ZeilschoolDataModels.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DBModels.edmx</DependentUpon>
-      <LastGenOutput>DBModels.Context.cs</LastGenOutput>
+      <DependentUpon>ZeilschoolDataModels.edmx</DependentUpon>
+      <LastGenOutput>ZeilschoolDataModels.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\DBModels.tt">
+    <Content Include="Models\ZeilschoolDataModels.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DBModels.edmx</DependentUpon>
-      <LastGenOutput>DBModels.cs</LastGenOutput>
+      <DependentUpon>ZeilschoolDataModels.edmx</DependentUpon>
+      <LastGenOutput>ZeilschoolDataModels.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -274,12 +271,12 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\DBModels.edmx">
+    <EntityDeploy Include="Models\ZeilschoolDataModels.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DBModels.Designer.cs</LastGenOutput>
+      <LastGenOutput>ZeilschoolDataModels.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\DBModels.edmx.diagram">
-      <DependentUpon>DBModels.edmx</DependentUpon>
+    <Content Include="Models\ZeilschoolDataModels.edmx.diagram">
+      <DependentUpon>ZeilschoolDataModels.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\Zeilschoolwebapi - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
