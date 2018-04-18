@@ -1,0 +1,400 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dewaaiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="cursist">
+          <Key>
+            <PropertyRef Name="EMAILADRES" />
+          </Key>
+          <Property Name="EMAILADRES" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="ROEPNAAM" Type="varchar" MaxLength="45" />
+          <Property Name="TUSSENVOEGSEL" Type="varchar" MaxLength="45" />
+          <Property Name="ACHTERNAAM" Type="varchar" MaxLength="45" />
+          <Property Name="ADRES" Type="varchar" MaxLength="45" />
+          <Property Name="WOONPLAATS" Type="varchar" MaxLength="45" />
+          <Property Name="TELEFOON" Type="varchar" MaxLength="16" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'dewaai.dbo.cursistcursus' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="cursistcursus">
+          <Key>
+            <PropertyRef Name="CURSUSCODE" />
+            <PropertyRef Name="EMAILADRES" />
+          </Key>
+          <Property Name="CURSUSCODE" Type="int" Nullable="false" />
+          <Property Name="EMAILADRES" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cursus">
+          <Key>
+            <PropertyRef Name="CURSUSCODE" />
+          </Key>
+          <Property Name="CURSUSCODE" Type="int" Nullable="false" />
+          <Property Name="BEGINDATUM" Type="datetime" />
+          <Property Name="EINDDATUM" Type="datetime" />
+          <Property Name="SOORTCODE" Type="int" />
+        </EntityType>
+        <EntityType Name="schip">
+          <Key>
+            <PropertyRef Name="NUMMER" />
+          </Key>
+          <Property Name="NUMMER" Type="int" Nullable="false" />
+          <Property Name="KLASSE" Type="int" />
+          <Property Name="NAAM" Type="varchar" MaxLength="45" />
+          <Property Name="AVERIJ" Type="tinyint" Nullable="false" />
+          <Property Name="SOORTCODE" Type="int" />
+        </EntityType>
+        <EntityType Name="schipklasse">
+          <Key>
+            <PropertyRef Name="KLASSEID" />
+          </Key>
+          <Property Name="KLASSEID" Type="int" Nullable="false" />
+          <Property Name="NAAM" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="soortcursus">
+          <Key>
+            <PropertyRef Name="SOORTCODE" />
+          </Key>
+          <Property Name="SOORTCODE" Type="int" Nullable="false" />
+          <Property Name="CURSUSSOORT" Type="varchar" MaxLength="45" />
+          <Property Name="PRIJS" Type="float" />
+        </EntityType>
+        <EntityType Name="werknemers">
+          <Key>
+            <PropertyRef Name="WERKNEMERID" />
+          </Key>
+          <Property Name="WERKNEMERID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GEBRUIKERSNAAM" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="WACHTWOORD" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="50" />
+          <Property Name="TELEFOON" Type="varchar" MaxLength="16" />
+        </EntityType>
+        <Association Name="FK__cursistcu__CURSU__52593CB8">
+          <End Role="cursus" Type="Self.cursus" Multiplicity="1" />
+          <End Role="cursistcursus" Type="Self.cursistcursus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cursus">
+              <PropertyRef Name="CURSUSCODE" />
+            </Principal>
+            <Dependent Role="cursistcursus">
+              <PropertyRef Name="CURSUSCODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__cursistcu__EMAIL__534D60F1">
+          <End Role="cursist" Type="Self.cursist" Multiplicity="1" />
+          <End Role="cursistcursus" Type="Self.cursistcursus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cursist">
+              <PropertyRef Name="EMAILADRES" />
+            </Principal>
+            <Dependent Role="cursistcursus">
+              <PropertyRef Name="EMAILADRES" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__cursus__SOORTCOD__5070F446">
+          <End Role="soortcursus" Type="Self.soortcursus" Multiplicity="0..1" />
+          <End Role="cursus" Type="Self.cursus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="soortcursus">
+              <PropertyRef Name="SOORTCODE" />
+            </Principal>
+            <Dependent Role="cursus">
+              <PropertyRef Name="SOORTCODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__schip__SOORTCODE__571DF1D5">
+          <End Role="soortcursus" Type="Self.soortcursus" Multiplicity="0..1" />
+          <End Role="schip" Type="Self.schip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="soortcursus">
+              <PropertyRef Name="SOORTCODE" />
+            </Principal>
+            <Dependent Role="schip">
+              <PropertyRef Name="SOORTCODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="schip_shipklasse_klasseid_fk">
+          <End Role="schipklasse" Type="Self.schipklasse" Multiplicity="0..1" />
+          <End Role="schip" Type="Self.schip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="schipklasse">
+              <PropertyRef Name="KLASSEID" />
+            </Principal>
+            <Dependent Role="schip">
+              <PropertyRef Name="KLASSE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dewaaiModelStoreContainer">
+          <EntitySet Name="cursist" EntityType="Self.cursist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cursus" EntityType="Self.cursus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="schip" EntityType="Self.schip" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="schipklasse" EntityType="Self.schipklasse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="soortcursus" EntityType="Self.soortcursus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="werknemers" EntityType="Self.werknemers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cursistcursus" EntityType="Self.cursistcursus" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [cursistcursus].[CURSUSCODE] AS [CURSUSCODE], 
+    [cursistcursus].[EMAILADRES] AS [EMAILADRES]
+    FROM [dbo].[cursistcursus] AS [cursistcursus]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__cursistcu__CURSU__52593CB8" Association="Self.FK__cursistcu__CURSU__52593CB8">
+            <End Role="cursus" EntitySet="cursus" />
+            <End Role="cursistcursus" EntitySet="cursistcursus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__cursistcu__EMAIL__534D60F1" Association="Self.FK__cursistcu__EMAIL__534D60F1">
+            <End Role="cursist" EntitySet="cursist" />
+            <End Role="cursistcursus" EntitySet="cursistcursus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__cursus__SOORTCOD__5070F446" Association="Self.FK__cursus__SOORTCOD__5070F446">
+            <End Role="soortcursus" EntitySet="soortcursus" />
+            <End Role="cursus" EntitySet="cursus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__schip__SOORTCODE__571DF1D5" Association="Self.FK__schip__SOORTCODE__571DF1D5">
+            <End Role="soortcursus" EntitySet="soortcursus" />
+            <End Role="schip" EntitySet="schip" />
+          </AssociationSet>
+          <AssociationSet Name="schip_shipklasse_klasseid_fk" Association="Self.schip_shipklasse_klasseid_fk">
+            <End Role="schipklasse" EntitySet="schipklasse" />
+            <End Role="schip" EntitySet="schip" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dewaaiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="cursist">
+          <Key>
+            <PropertyRef Name="EMAILADRES" />
+          </Key>
+          <Property Name="EMAILADRES" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ROEPNAAM" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="TUSSENVOEGSEL" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ACHTERNAAM" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ADRES" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="WOONPLAATS" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="TELEFOON" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="cursus" Relationship="Self.cursistcursus" FromRole="cursist" ToRole="cursus" />
+        </EntityType>
+        <EntityType Name="cursus">
+          <Key>
+            <PropertyRef Name="CURSUSCODE" />
+          </Key>
+          <Property Name="CURSUSCODE" Type="Int32" Nullable="false" />
+          <Property Name="BEGINDATUM" Type="DateTime" Precision="3" />
+          <Property Name="EINDDATUM" Type="DateTime" Precision="3" />
+          <Property Name="SOORTCODE" Type="Int32" />
+          <NavigationProperty Name="soortcursus" Relationship="Self.FK__cursus__SOORTCOD__5070F446" FromRole="cursus" ToRole="soortcursus" />
+          <NavigationProperty Name="cursist" Relationship="Self.cursistcursus" FromRole="cursus" ToRole="cursist" />
+        </EntityType>
+        <EntityType Name="schip">
+          <Key>
+            <PropertyRef Name="NUMMER" />
+          </Key>
+          <Property Name="NUMMER" Type="Int32" Nullable="false" />
+          <Property Name="KLASSE" Type="Int32" />
+          <Property Name="NAAM" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="AVERIJ" Type="Byte" Nullable="false" />
+          <Property Name="SOORTCODE" Type="Int32" />
+          <NavigationProperty Name="soortcursus" Relationship="Self.FK__schip__SOORTCODE__571DF1D5" FromRole="schip" ToRole="soortcursus" />
+          <NavigationProperty Name="schipklasse" Relationship="Self.schip_shipklasse_klasseid_fk" FromRole="schip" ToRole="schipklasse" />
+        </EntityType>
+        <EntityType Name="schipklasse">
+          <Key>
+            <PropertyRef Name="KLASSEID" />
+          </Key>
+          <Property Name="KLASSEID" Type="Int32" Nullable="false" />
+          <Property Name="NAAM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="schip" Relationship="Self.schip_shipklasse_klasseid_fk" FromRole="schipklasse" ToRole="schip" />
+        </EntityType>
+        <EntityType Name="soortcursus">
+          <Key>
+            <PropertyRef Name="SOORTCODE" />
+          </Key>
+          <Property Name="SOORTCODE" Type="Int32" Nullable="false" />
+          <Property Name="CURSUSSOORT" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="PRIJS" Type="Double" />
+          <NavigationProperty Name="cursus" Relationship="Self.FK__cursus__SOORTCOD__5070F446" FromRole="soortcursus" ToRole="cursus" />
+          <NavigationProperty Name="schip" Relationship="Self.FK__schip__SOORTCODE__571DF1D5" FromRole="soortcursus" ToRole="schip" />
+        </EntityType>
+        <EntityType Name="werknemers">
+          <Key>
+            <PropertyRef Name="WERKNEMERID" />
+          </Key>
+          <Property Name="WERKNEMERID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GEBRUIKERSNAAM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="WACHTWOORD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TELEFOON" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK__cursus__SOORTCOD__5070F446">
+          <End Role="soortcursus" Type="Self.soortcursus" Multiplicity="0..1" />
+          <End Role="cursus" Type="Self.cursus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="soortcursus">
+              <PropertyRef Name="SOORTCODE" />
+            </Principal>
+            <Dependent Role="cursus">
+              <PropertyRef Name="SOORTCODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__schip__SOORTCODE__571DF1D5">
+          <End Role="soortcursus" Type="Self.soortcursus" Multiplicity="0..1" />
+          <End Role="schip" Type="Self.schip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="soortcursus">
+              <PropertyRef Name="SOORTCODE" />
+            </Principal>
+            <Dependent Role="schip">
+              <PropertyRef Name="SOORTCODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="schip_shipklasse_klasseid_fk">
+          <End Role="schipklasse" Type="Self.schipklasse" Multiplicity="0..1" />
+          <End Role="schip" Type="Self.schip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="schipklasse">
+              <PropertyRef Name="KLASSEID" />
+            </Principal>
+            <Dependent Role="schip">
+              <PropertyRef Name="KLASSE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="cursistcursus">
+          <End Role="cursus" Type="Self.cursus" Multiplicity="*" />
+          <End Role="cursist" Type="Self.cursist" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="dewaaiEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="cursist" EntityType="Self.cursist" />
+          <EntitySet Name="cursus" EntityType="Self.cursus" />
+          <EntitySet Name="schip" EntityType="Self.schip" />
+          <EntitySet Name="schipklasse" EntityType="Self.schipklasse" />
+          <EntitySet Name="soortcursus" EntityType="Self.soortcursus" />
+          <EntitySet Name="werknemers" EntityType="Self.werknemers" />
+          <AssociationSet Name="FK__cursus__SOORTCOD__5070F446" Association="Self.FK__cursus__SOORTCOD__5070F446">
+            <End Role="soortcursus" EntitySet="soortcursus" />
+            <End Role="cursus" EntitySet="cursus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__schip__SOORTCODE__571DF1D5" Association="Self.FK__schip__SOORTCODE__571DF1D5">
+            <End Role="soortcursus" EntitySet="soortcursus" />
+            <End Role="schip" EntitySet="schip" />
+          </AssociationSet>
+          <AssociationSet Name="schip_shipklasse_klasseid_fk" Association="Self.schip_shipklasse_klasseid_fk">
+            <End Role="schipklasse" EntitySet="schipklasse" />
+            <End Role="schip" EntitySet="schip" />
+          </AssociationSet>
+          <AssociationSet Name="cursistcursus" Association="Self.cursistcursus">
+            <End Role="cursus" EntitySet="cursus" />
+            <End Role="cursist" EntitySet="cursist" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dewaaiModelStoreContainer" CdmEntityContainer="dewaaiEntities">
+          <EntitySetMapping Name="cursist">
+            <EntityTypeMapping TypeName="dewaaiModel.cursist">
+              <MappingFragment StoreEntitySet="cursist">
+                <ScalarProperty Name="EMAILADRES" ColumnName="EMAILADRES" />
+                <ScalarProperty Name="ROEPNAAM" ColumnName="ROEPNAAM" />
+                <ScalarProperty Name="TUSSENVOEGSEL" ColumnName="TUSSENVOEGSEL" />
+                <ScalarProperty Name="ACHTERNAAM" ColumnName="ACHTERNAAM" />
+                <ScalarProperty Name="ADRES" ColumnName="ADRES" />
+                <ScalarProperty Name="WOONPLAATS" ColumnName="WOONPLAATS" />
+                <ScalarProperty Name="TELEFOON" ColumnName="TELEFOON" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cursus">
+            <EntityTypeMapping TypeName="dewaaiModel.cursus">
+              <MappingFragment StoreEntitySet="cursus">
+                <ScalarProperty Name="CURSUSCODE" ColumnName="CURSUSCODE" />
+                <ScalarProperty Name="BEGINDATUM" ColumnName="BEGINDATUM" />
+                <ScalarProperty Name="EINDDATUM" ColumnName="EINDDATUM" />
+                <ScalarProperty Name="SOORTCODE" ColumnName="SOORTCODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="schip">
+            <EntityTypeMapping TypeName="dewaaiModel.schip">
+              <MappingFragment StoreEntitySet="schip">
+                <ScalarProperty Name="NUMMER" ColumnName="NUMMER" />
+                <ScalarProperty Name="KLASSE" ColumnName="KLASSE" />
+                <ScalarProperty Name="NAAM" ColumnName="NAAM" />
+                <ScalarProperty Name="AVERIJ" ColumnName="AVERIJ" />
+                <ScalarProperty Name="SOORTCODE" ColumnName="SOORTCODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="schipklasse">
+            <EntityTypeMapping TypeName="dewaaiModel.schipklasse">
+              <MappingFragment StoreEntitySet="schipklasse">
+                <ScalarProperty Name="KLASSEID" ColumnName="KLASSEID" />
+                <ScalarProperty Name="NAAM" ColumnName="NAAM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="soortcursus">
+            <EntityTypeMapping TypeName="dewaaiModel.soortcursus">
+              <MappingFragment StoreEntitySet="soortcursus">
+                <ScalarProperty Name="SOORTCODE" ColumnName="SOORTCODE" />
+                <ScalarProperty Name="CURSUSSOORT" ColumnName="CURSUSSOORT" />
+                <ScalarProperty Name="PRIJS" ColumnName="PRIJS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="werknemers">
+            <EntityTypeMapping TypeName="dewaaiModel.werknemers">
+              <MappingFragment StoreEntitySet="werknemers">
+                <ScalarProperty Name="WERKNEMERID" ColumnName="WERKNEMERID" />
+                <ScalarProperty Name="GEBRUIKERSNAAM" ColumnName="GEBRUIKERSNAAM" />
+                <ScalarProperty Name="WACHTWOORD" ColumnName="WACHTWOORD" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="TELEFOON" ColumnName="TELEFOON" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="cursistcursus" TypeName="dewaaiModel.cursistcursus" StoreEntitySet="cursistcursus">
+            <EndProperty Name="cursus">
+              <ScalarProperty Name="CURSUSCODE" ColumnName="CURSUSCODE" />
+            </EndProperty>
+            <EndProperty Name="cursist">
+              <ScalarProperty Name="EMAILADRES" ColumnName="EMAILADRES" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
