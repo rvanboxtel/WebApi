@@ -6,7 +6,6 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WebApi.Models;
@@ -25,9 +24,9 @@ namespace WebApi.Controllers
 
         // GET: api/werknemers/5
         [ResponseType(typeof(werknemers))]
-        public async Task<IHttpActionResult> Getwerknemers(int id)
+        public IHttpActionResult Getwerknemers(int id)
         {
-            werknemers werknemers = await db.werknemers.FindAsync(id);
+            werknemers werknemers = db.werknemers.Find(id);
             if (werknemers == null)
             {
                 return NotFound();
@@ -38,7 +37,7 @@ namespace WebApi.Controllers
 
         // PUT: api/werknemers/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> Putwerknemers(int id, werknemers werknemers)
+        public IHttpActionResult Putwerknemers(int id, werknemers werknemers)
         {
             if (!ModelState.IsValid)
             {
@@ -54,7 +53,7 @@ namespace WebApi.Controllers
 
             try
             {
-                await db.SaveChangesAsync();
+                db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -73,7 +72,7 @@ namespace WebApi.Controllers
 
         // POST: api/werknemers
         [ResponseType(typeof(werknemers))]
-        public async Task<IHttpActionResult> Postwerknemers(werknemers werknemers)
+        public IHttpActionResult Postwerknemers(werknemers werknemers)
         {
             if (!ModelState.IsValid)
             {
@@ -81,23 +80,23 @@ namespace WebApi.Controllers
             }
 
             db.werknemers.Add(werknemers);
-            await db.SaveChangesAsync();
+            db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = werknemers.WERKNEMERID }, werknemers);
         }
 
         // DELETE: api/werknemers/5
         [ResponseType(typeof(werknemers))]
-        public async Task<IHttpActionResult> Deletewerknemers(int id)
+        public IHttpActionResult Deletewerknemers(int id)
         {
-            werknemers werknemers = await db.werknemers.FindAsync(id);
+            werknemers werknemers = db.werknemers.Find(id);
             if (werknemers == null)
             {
                 return NotFound();
             }
 
             db.werknemers.Remove(werknemers);
-            await db.SaveChangesAsync();
+            db.SaveChanges();
 
             return Ok(werknemers);
         }

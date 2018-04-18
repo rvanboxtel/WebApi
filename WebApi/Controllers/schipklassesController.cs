@@ -6,7 +6,6 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WebApi.Models;
@@ -25,9 +24,9 @@ namespace WebApi.Controllers
 
         // GET: api/schipklasses/5
         [ResponseType(typeof(schipklasse))]
-        public async Task<IHttpActionResult> Getschipklasse(int id)
+        public IHttpActionResult Getschipklasse(int id)
         {
-            schipklasse schipklasse = await db.schipklasse.FindAsync(id);
+            schipklasse schipklasse = db.schipklasse.Find(id);
             if (schipklasse == null)
             {
                 return NotFound();
@@ -38,7 +37,7 @@ namespace WebApi.Controllers
 
         // PUT: api/schipklasses/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> Putschipklasse(int id, schipklasse schipklasse)
+        public IHttpActionResult Putschipklasse(int id, schipklasse schipklasse)
         {
             if (!ModelState.IsValid)
             {
@@ -54,7 +53,7 @@ namespace WebApi.Controllers
 
             try
             {
-                await db.SaveChangesAsync();
+                db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -73,7 +72,7 @@ namespace WebApi.Controllers
 
         // POST: api/schipklasses
         [ResponseType(typeof(schipklasse))]
-        public async Task<IHttpActionResult> Postschipklasse(schipklasse schipklasse)
+        public IHttpActionResult Postschipklasse(schipklasse schipklasse)
         {
             if (!ModelState.IsValid)
             {
@@ -84,7 +83,7 @@ namespace WebApi.Controllers
 
             try
             {
-                await db.SaveChangesAsync();
+                db.SaveChanges();
             }
             catch (DbUpdateException)
             {
@@ -103,16 +102,16 @@ namespace WebApi.Controllers
 
         // DELETE: api/schipklasses/5
         [ResponseType(typeof(schipklasse))]
-        public async Task<IHttpActionResult> Deleteschipklasse(int id)
+        public IHttpActionResult Deleteschipklasse(int id)
         {
-            schipklasse schipklasse = await db.schipklasse.FindAsync(id);
+            schipklasse schipklasse = db.schipklasse.Find(id);
             if (schipklasse == null)
             {
                 return NotFound();
             }
 
             db.schipklasse.Remove(schipklasse);
-            await db.SaveChangesAsync();
+            db.SaveChanges();
 
             return Ok(schipklasse);
         }

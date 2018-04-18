@@ -6,7 +6,6 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WebApi.Models;
@@ -25,9 +24,9 @@ namespace WebApi.Controllers
 
         // GET: api/soortcursus/5
         [ResponseType(typeof(soortcursus))]
-        public async Task<IHttpActionResult> Getsoortcursus(int id)
+        public IHttpActionResult Getsoortcursus(int id)
         {
-            soortcursus soortcursus = await db.soortcursus.FindAsync(id);
+            soortcursus soortcursus = db.soortcursus.Find(id);
             if (soortcursus == null)
             {
                 return NotFound();
@@ -38,7 +37,7 @@ namespace WebApi.Controllers
 
         // PUT: api/soortcursus/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> Putsoortcursus(int id, soortcursus soortcursus)
+        public IHttpActionResult Putsoortcursus(int id, soortcursus soortcursus)
         {
             if (!ModelState.IsValid)
             {
@@ -54,7 +53,7 @@ namespace WebApi.Controllers
 
             try
             {
-                await db.SaveChangesAsync();
+                db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -73,7 +72,7 @@ namespace WebApi.Controllers
 
         // POST: api/soortcursus
         [ResponseType(typeof(soortcursus))]
-        public async Task<IHttpActionResult> Postsoortcursus(soortcursus soortcursus)
+        public IHttpActionResult Postsoortcursus(soortcursus soortcursus)
         {
             if (!ModelState.IsValid)
             {
@@ -84,7 +83,7 @@ namespace WebApi.Controllers
 
             try
             {
-                await db.SaveChangesAsync();
+                db.SaveChanges();
             }
             catch (DbUpdateException)
             {
@@ -103,16 +102,16 @@ namespace WebApi.Controllers
 
         // DELETE: api/soortcursus/5
         [ResponseType(typeof(soortcursus))]
-        public async Task<IHttpActionResult> Deletesoortcursus(int id)
+        public IHttpActionResult Deletesoortcursus(int id)
         {
-            soortcursus soortcursus = await db.soortcursus.FindAsync(id);
+            soortcursus soortcursus = db.soortcursus.Find(id);
             if (soortcursus == null)
             {
                 return NotFound();
             }
 
             db.soortcursus.Remove(soortcursus);
-            await db.SaveChangesAsync();
+            db.SaveChanges();
 
             return Ok(soortcursus);
         }

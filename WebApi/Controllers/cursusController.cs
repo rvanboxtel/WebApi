@@ -6,7 +6,6 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WebApi.Models;
@@ -25,9 +24,9 @@ namespace WebApi.Controllers
 
         // GET: api/cursus/5
         [ResponseType(typeof(cursus))]
-        public async Task<IHttpActionResult> Getcursus(int id)
+        public IHttpActionResult Getcursus(int id)
         {
-            cursus cursus = await db.cursus.FindAsync(id);
+            cursus cursus = db.cursus.Find(id);
             if (cursus == null)
             {
                 return NotFound();
@@ -38,7 +37,7 @@ namespace WebApi.Controllers
 
         // PUT: api/cursus/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> Putcursus(int id, cursus cursus)
+        public IHttpActionResult Putcursus(int id, cursus cursus)
         {
             if (!ModelState.IsValid)
             {
@@ -54,7 +53,7 @@ namespace WebApi.Controllers
 
             try
             {
-                await db.SaveChangesAsync();
+                db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -73,7 +72,7 @@ namespace WebApi.Controllers
 
         // POST: api/cursus
         [ResponseType(typeof(cursus))]
-        public async Task<IHttpActionResult> Postcursus(cursus cursus)
+        public IHttpActionResult Postcursus(cursus cursus)
         {
             if (!ModelState.IsValid)
             {
@@ -84,7 +83,7 @@ namespace WebApi.Controllers
 
             try
             {
-                await db.SaveChangesAsync();
+                db.SaveChanges();
             }
             catch (DbUpdateException)
             {
@@ -103,16 +102,16 @@ namespace WebApi.Controllers
 
         // DELETE: api/cursus/5
         [ResponseType(typeof(cursus))]
-        public async Task<IHttpActionResult> Deletecursus(int id)
+        public IHttpActionResult Deletecursus(int id)
         {
-            cursus cursus = await db.cursus.FindAsync(id);
+            cursus cursus = db.cursus.Find(id);
             if (cursus == null)
             {
                 return NotFound();
             }
 
             db.cursus.Remove(cursus);
-            await db.SaveChangesAsync();
+            db.SaveChanges();
 
             return Ok(cursus);
         }

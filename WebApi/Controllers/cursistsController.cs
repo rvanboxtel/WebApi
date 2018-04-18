@@ -6,7 +6,6 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WebApi.Models;
@@ -25,9 +24,9 @@ namespace WebApi.Controllers
 
         // GET: api/cursists/5
         [ResponseType(typeof(cursist))]
-        public async Task<IHttpActionResult> Getcursist(string id)
+        public IHttpActionResult Getcursist(string id)
         {
-            cursist cursist = await db.cursist.FindAsync(id);
+            cursist cursist = db.cursist.Find(id);
             if (cursist == null)
             {
                 return NotFound();
@@ -38,7 +37,7 @@ namespace WebApi.Controllers
 
         // PUT: api/cursists/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> Putcursist(string id, cursist cursist)
+        public IHttpActionResult Putcursist(string id, cursist cursist)
         {
             if (!ModelState.IsValid)
             {
@@ -54,7 +53,7 @@ namespace WebApi.Controllers
 
             try
             {
-                await db.SaveChangesAsync();
+                db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -73,7 +72,7 @@ namespace WebApi.Controllers
 
         // POST: api/cursists
         [ResponseType(typeof(cursist))]
-        public async Task<IHttpActionResult> Postcursist(cursist cursist)
+        public IHttpActionResult Postcursist(cursist cursist)
         {
             if (!ModelState.IsValid)
             {
@@ -84,7 +83,7 @@ namespace WebApi.Controllers
 
             try
             {
-                await db.SaveChangesAsync();
+                db.SaveChanges();
             }
             catch (DbUpdateException)
             {
@@ -103,16 +102,16 @@ namespace WebApi.Controllers
 
         // DELETE: api/cursists/5
         [ResponseType(typeof(cursist))]
-        public async Task<IHttpActionResult> Deletecursist(string id)
+        public IHttpActionResult Deletecursist(string id)
         {
-            cursist cursist = await db.cursist.FindAsync(id);
+            cursist cursist = db.cursist.Find(id);
             if (cursist == null)
             {
                 return NotFound();
             }
 
             db.cursist.Remove(cursist);
-            await db.SaveChangesAsync();
+            db.SaveChanges();
 
             return Ok(cursist);
         }

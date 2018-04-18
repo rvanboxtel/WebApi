@@ -6,7 +6,6 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WebApi.Models;
@@ -25,9 +24,9 @@ namespace WebApi.Controllers
 
         // GET: api/schips/5
         [ResponseType(typeof(schip))]
-        public async Task<IHttpActionResult> Getschip(int id)
+        public IHttpActionResult Getschip(int id)
         {
-            schip schip = await db.schip.FindAsync(id);
+            schip schip = db.schip.Find(id);
             if (schip == null)
             {
                 return NotFound();
@@ -38,7 +37,7 @@ namespace WebApi.Controllers
 
         // PUT: api/schips/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> Putschip(int id, schip schip)
+        public IHttpActionResult Putschip(int id, schip schip)
         {
             if (!ModelState.IsValid)
             {
@@ -54,7 +53,7 @@ namespace WebApi.Controllers
 
             try
             {
-                await db.SaveChangesAsync();
+                db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -73,7 +72,7 @@ namespace WebApi.Controllers
 
         // POST: api/schips
         [ResponseType(typeof(schip))]
-        public async Task<IHttpActionResult> Postschip(schip schip)
+        public IHttpActionResult Postschip(schip schip)
         {
             if (!ModelState.IsValid)
             {
@@ -84,7 +83,7 @@ namespace WebApi.Controllers
 
             try
             {
-                await db.SaveChangesAsync();
+                db.SaveChanges();
             }
             catch (DbUpdateException)
             {
@@ -103,16 +102,16 @@ namespace WebApi.Controllers
 
         // DELETE: api/schips/5
         [ResponseType(typeof(schip))]
-        public async Task<IHttpActionResult> Deleteschip(int id)
+        public IHttpActionResult Deleteschip(int id)
         {
-            schip schip = await db.schip.FindAsync(id);
+            schip schip = db.schip.Find(id);
             if (schip == null)
             {
                 return NotFound();
             }
 
             db.schip.Remove(schip);
-            await db.SaveChangesAsync();
+            db.SaveChanges();
 
             return Ok(schip);
         }
