@@ -73,6 +73,7 @@ namespace WebApi.Controllers
 
         // POST: api/schips
         [ResponseType(typeof(schips))]
+        [HttpPost]
         public async Task<IHttpActionResult> Postschips(schips schips)
         {
             if (!ModelState.IsValid)
