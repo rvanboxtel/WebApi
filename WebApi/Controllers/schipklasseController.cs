@@ -13,21 +13,21 @@ using WebApi.Models;
 
 namespace WebApi.Controllers
 {
-    public class schipklassesController : ApiController
+    public class schipklasseController : ApiController
     {
         private WebApiContext db = new WebApiContext();
 
         // GET: api/schipklasses
         public IQueryable<schipklasse> Getschipklasses()
         {
-            return db.schipklasses;
+            return db.schipklasse;
         }
 
         // GET: api/schipklasses/5
         [ResponseType(typeof(schipklasse))]
         public async Task<IHttpActionResult> Getschipklasse(int id)
         {
-            schipklasse schipklasse = await db.schipklasses.FindAsync(id);
+            schipklasse schipklasse = await db.schipklasse.FindAsync(id);
             if (schipklasse == null)
             {
                 return NotFound();
@@ -80,7 +80,7 @@ namespace WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.schipklasses.Add(schipklasse);
+            db.schipklasse.Add(schipklasse);
             await db.SaveChangesAsync();
 
             return CreatedAtRoute("DefaultApi", new { id = schipklasse.KLASSEID }, schipklasse);
@@ -90,13 +90,13 @@ namespace WebApi.Controllers
         [ResponseType(typeof(schipklasse))]
         public async Task<IHttpActionResult> Deleteschipklasse(int id)
         {
-            schipklasse schipklasse = await db.schipklasses.FindAsync(id);
+            schipklasse schipklasse = await db.schipklasse.FindAsync(id);
             if (schipklasse == null)
             {
                 return NotFound();
             }
 
-            db.schipklasses.Remove(schipklasse);
+            db.schipklasse.Remove(schipklasse);
             await db.SaveChangesAsync();
 
             return Ok(schipklasse);
@@ -113,7 +113,7 @@ namespace WebApi.Controllers
 
         private bool schipklasseExists(int id)
         {
-            return db.schipklasses.Count(e => e.KLASSEID == id) > 0;
+            return db.schipklasse.Count(e => e.KLASSEID == id) > 0;
         }
     }
 }

@@ -13,21 +13,21 @@ using WebApi.Models;
 
 namespace WebApi.Controllers
 {
-    public class schipsController : ApiController
+    public class schipController : ApiController
     {
         private WebApiContext db = new WebApiContext();
 
         // GET: api/schips
         public IQueryable<schip> Getschips()
         {
-            return db.schips;
+            return db.schip;
         }
 
         // GET: api/schips/5
         [ResponseType(typeof(schip))]
         public async Task<IHttpActionResult> Getschip(int id)
         {
-            schip schip = await db.schips.FindAsync(id);
+            schip schip = await db.schip.FindAsync(id);
             if (schip == null)
             {
                 return NotFound();
@@ -80,7 +80,7 @@ namespace WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.schips.Add(schip);
+            db.schip.Add(schip);
             await db.SaveChangesAsync();
 
             return CreatedAtRoute("DefaultApi", new { id = schip.NUMMER }, schip);
@@ -90,13 +90,13 @@ namespace WebApi.Controllers
         [ResponseType(typeof(schip))]
         public async Task<IHttpActionResult> Deleteschip(int id)
         {
-            schip schip = await db.schips.FindAsync(id);
+            schip schip = await db.schip.FindAsync(id);
             if (schip == null)
             {
                 return NotFound();
             }
 
-            db.schips.Remove(schip);
+            db.schip.Remove(schip);
             await db.SaveChangesAsync();
 
             return Ok(schip);
@@ -113,7 +113,7 @@ namespace WebApi.Controllers
 
         private bool schipExists(int id)
         {
-            return db.schips.Count(e => e.NUMMER == id) > 0;
+            return db.schip.Count(e => e.NUMMER == id) > 0;
         }
     }
 }
