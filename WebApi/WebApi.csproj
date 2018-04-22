@@ -191,14 +191,14 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\schipklasseController.cs" />
-    <Compile Include="Controllers\schipController.cs" />
+    <Compile Include="Controllers\schipklassesController.cs" />
+    <Compile Include="Controllers\schipsController.cs" />
     <Compile Include="Controllers\soortcursusController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\schip.cs" />
-    <Compile Include="Models\schipklasse.cs" />
+    <Compile Include="Models\schips.cs" />
+    <Compile Include="Models\schipklasses.cs" />
     <Compile Include="Models\soortcursus.cs" />
     <Compile Include="Models\WebApiContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

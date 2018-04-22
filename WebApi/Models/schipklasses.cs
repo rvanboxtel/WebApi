@@ -7,13 +7,10 @@ using System.Threading.Tasks;
 
 namespace WebApi.Models
 {
-    public class schip
+    public class schipklasses
     {
         [Key]
-        public int NUMMER { get; set; }
-        public int KLASSE { get; set; }
+        public int KLASSEID { get; set; }
         public string NAAM { get; set; }
-        public Boolean AVERIJ { get; set; }
-        public int SOORTCODE { get; set; }
     }
 }

@@ -13,44 +13,44 @@ using WebApi.Models;
 
 namespace WebApi.Controllers
 {
-    public class schipController : ApiController
+    public class schipsController : ApiController
     {
         private WebApiContext db = new WebApiContext();
 
         // GET: api/schips
-        public IQueryable<schip> Getschips()
+        public IQueryable<schips> Getschip()
         {
             return db.schip;
         }
 
         // GET: api/schips/5
-        [ResponseType(typeof(schip))]
-        public async Task<IHttpActionResult> Getschip(int id)
+        [ResponseType(typeof(schips))]
+        public async Task<IHttpActionResult> Getschips(int id)
         {
-            schip schip = await db.schip.FindAsync(id);
-            if (schip == null)
+            schips schips = await db.schip.FindAsync(id);
+            if (schips == null)
             {
                 return NotFound();
             }
 
-            return Ok(schip);
+            return Ok(schips);
         }
 
         // PUT: api/schips/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> Putschip(int id, schip schip)
+        public async Task<IHttpActionResult> Putschips(int id, schips schips)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != schip.NUMMER)
+            if (id != schips.NUMMER)
             {
                 return BadRequest();
             }
 
-            db.Entry(schip).State = EntityState.Modified;
+            db.Entry(schips).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +58,7 @@ namespace WebApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!schipExists(id))
+                if (!schipsExists(id))
                 {
                     return NotFound();
                 }
@@ -72,34 +72,34 @@ namespace WebApi.Controllers
         }
 
         // POST: api/schips
-        [ResponseType(typeof(schip))]
-        public async Task<IHttpActionResult> Postschip(schip schip)
+        [ResponseType(typeof(schips))]
+        public async Task<IHttpActionResult> Postschips(schips schips)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.schip.Add(schip);
+            db.schip.Add(schips);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = schip.NUMMER }, schip);
+            return CreatedAtRoute("DefaultApi", new { id = schips.NUMMER }, schips);
         }
 
         // DELETE: api/schips/5
-        [ResponseType(typeof(schip))]
-        public async Task<IHttpActionResult> Deleteschip(int id)
+        [ResponseType(typeof(schips))]
+        public async Task<IHttpActionResult> Deleteschips(int id)
         {
-            schip schip = await db.schip.FindAsync(id);
-            if (schip == null)
+            schips schips = await db.schip.FindAsync(id);
+            if (schips == null)
             {
                 return NotFound();
             }
 
-            db.schip.Remove(schip);
+            db.schip.Remove(schips);
             await db.SaveChangesAsync();
 
-            return Ok(schip);
+            return Ok(schips);
         }
 
         protected override void Dispose(bool disposing)
@@ -111,7 +111,7 @@ namespace WebApi.Controllers
             base.Dispose(disposing);
         }
 
-        private bool schipExists(int id)
+        private bool schipsExists(int id)
         {
             return db.schip.Count(e => e.NUMMER == id) > 0;
         }

@@ -13,21 +13,21 @@ using WebApi.Models;
 
 namespace WebApi.Controllers
 {
-    public class schipklasseController : ApiController
+    public class schipklassesController : ApiController
     {
         private WebApiContext db = new WebApiContext();
 
-        // GET: api/schipklasses
-        public IQueryable<schipklasse> Getschipklasses()
+        // GET: api/schipklasse
+        public IQueryable<schipklasses> Getschipklasse()
         {
             return db.schipklasse;
         }
 
-        // GET: api/schipklasses/5
-        [ResponseType(typeof(schipklasse))]
+        // GET: api/schipklasse/5
+        [ResponseType(typeof(schipklasses))]
         public async Task<IHttpActionResult> Getschipklasse(int id)
         {
-            schipklasse schipklasse = await db.schipklasse.FindAsync(id);
+            schipklasses schipklasse = await db.schipklasse.FindAsync(id);
             if (schipklasse == null)
             {
                 return NotFound();
@@ -36,9 +36,9 @@ namespace WebApi.Controllers
             return Ok(schipklasse);
         }
 
-        // PUT: api/schipklasses/5
+        // PUT: api/schipklasse/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> Putschipklasse(int id, schipklasse schipklasse)
+        public async Task<IHttpActionResult> Putschipklasse(int id, schipklasses schipklasse)
         {
             if (!ModelState.IsValid)
             {
@@ -71,9 +71,9 @@ namespace WebApi.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/schipklasses
-        [ResponseType(typeof(schipklasse))]
-        public async Task<IHttpActionResult> Postschipklasse(schipklasse schipklasse)
+        // POST: api/schipklasse
+        [ResponseType(typeof(schipklasses))]
+        public async Task<IHttpActionResult> Postschipklasse(schipklasses schipklasse)
         {
             if (!ModelState.IsValid)
             {
@@ -86,11 +86,11 @@ namespace WebApi.Controllers
             return CreatedAtRoute("DefaultApi", new { id = schipklasse.KLASSEID }, schipklasse);
         }
 
-        // DELETE: api/schipklasses/5
-        [ResponseType(typeof(schipklasse))]
+        // DELETE: api/schipklasse/5
+        [ResponseType(typeof(schipklasses))]
         public async Task<IHttpActionResult> Deleteschipklasse(int id)
         {
-            schipklasse schipklasse = await db.schipklasse.FindAsync(id);
+            schipklasses schipklasse = await db.schipklasse.FindAsync(id);
             if (schipklasse == null)
             {
                 return NotFound();

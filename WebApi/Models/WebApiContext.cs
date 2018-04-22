@@ -22,8 +22,8 @@ namespace WebApi.Models
 
         public System.Data.Entity.DbSet<WebApi.Models.soortcursus> soortcursus { get; set; }
 
-        public System.Data.Entity.DbSet<WebApi.Models.schip> schip { get; set; }
+        public System.Data.Entity.DbSet<WebApi.Models.schips> schip { get; set; }
 
-        public System.Data.Entity.DbSet<WebApi.Models.schipklasse> schipklasse { get; set; }
+        public System.Data.Entity.DbSet<WebApi.Models.schipklasses> schipklasse { get; set; }
     }
 }
