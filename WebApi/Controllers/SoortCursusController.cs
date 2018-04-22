@@ -9,6 +9,19 @@ namespace WebApi.Controllers
 {
     public class SoortCursusController : ApiController
     {
-        public IEnumerable<soortcursu>
+        public IEnumerable<soortcursu> Get()
+        {
+            using(dewaaiEntities entities = new dewaaiEntities())
+            {
+                return entities.soortcursus.ToList();
+            }
+        }
+        public soortcursu Get(int id)
+        {
+            using (dewaaiEntities entities = new dewaaiEntities())
+            {
+                return entities.soortcursus.FirstOrDefault(e => e.SOORTCODE == id);
+            }
+        }
     }
 }
