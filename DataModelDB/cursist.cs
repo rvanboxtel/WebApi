@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebApi.Models
+namespace DataModelDB
 {
     using System;
     using System.Collections.Generic;
@@ -17,7 +17,7 @@ namespace WebApi.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public cursist()
         {
-            this.cursus = new HashSet<cursus>();
+            this.cursus = new HashSet<cursu>();
         }
     
         public string EMAILADRES { get; set; }
@@ -29,6 +29,6 @@ namespace WebApi.Models
         public string TELEFOON { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<cursus> cursus { get; set; }
+        public virtual ICollection<cursu> cursus { get; set; }
     }
 }

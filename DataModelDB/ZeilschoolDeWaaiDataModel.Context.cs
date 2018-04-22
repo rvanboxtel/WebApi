@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebApi.Models
+namespace DataModelDB
 {
     using System;
     using System.Data.Entity;
@@ -25,11 +25,11 @@ namespace WebApi.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<cursist> cursist { get; set; }
-        public virtual DbSet<cursus> cursus { get; set; }
-        public virtual DbSet<schip> schip { get; set; }
-        public virtual DbSet<schipklasse> schipklasse { get; set; }
-        public virtual DbSet<soortcursus> soortcursus { get; set; }
-        public virtual DbSet<werknemers> werknemers { get; set; }
+        public virtual DbSet<cursist> cursists { get; set; }
+        public virtual DbSet<cursu> cursus { get; set; }
+        public virtual DbSet<schip> schips { get; set; }
+        public virtual DbSet<schipklasse> schipklasses { get; set; }
+        public virtual DbSet<soortcursu> soortcursus { get; set; }
+        public virtual DbSet<werknemer> werknemers { get; set; }
     }
 }

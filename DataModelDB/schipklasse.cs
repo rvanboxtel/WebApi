@@ -7,27 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebApi.Models
+namespace DataModelDB
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class soortcursus
+    public partial class schipklasse
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public soortcursus()
+        public schipklasse()
         {
-            this.cursus = new HashSet<cursus>();
-            this.schip = new HashSet<schip>();
+            this.schips = new HashSet<schip>();
         }
     
-        public int SOORTCODE { get; set; }
-        public string CURSUSSOORT { get; set; }
-        public Nullable<double> PRIJS { get; set; }
+        public int KLASSEID { get; set; }
+        public string NAAM { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<cursus> cursus { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<schip> schip { get; set; }
+        public virtual ICollection<schip> schips { get; set; }
     }
 }

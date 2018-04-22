@@ -7,12 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebApi.Models
+namespace DataModelDB
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class werknemers
+    public partial class werknemer
     {
         public int WERKNEMERID { get; set; }
         public string GEBRUIKERSNAAM { get; set; }

@@ -183,7 +183,7 @@ warning 6002: The table/view 'dewaai.dbo.cursistcursus' does not have a primary 
           <Property Name="TELEFOON" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="cursus" Relationship="Self.cursistcursus" FromRole="cursist" ToRole="cursus" />
         </EntityType>
-        <EntityType Name="cursus">
+        <EntityType Name="cursu">
           <Key>
             <PropertyRef Name="CURSUSCODE" />
           </Key>
@@ -191,8 +191,8 @@ warning 6002: The table/view 'dewaai.dbo.cursistcursus' does not have a primary 
           <Property Name="BEGINDATUM" Type="DateTime" Precision="3" />
           <Property Name="EINDDATUM" Type="DateTime" Precision="3" />
           <Property Name="SOORTCODE" Type="Int32" />
-          <NavigationProperty Name="soortcursus" Relationship="Self.FK__cursus__SOORTCOD__5070F446" FromRole="cursus" ToRole="soortcursus" />
-          <NavigationProperty Name="cursist" Relationship="Self.cursistcursus" FromRole="cursus" ToRole="cursist" />
+          <NavigationProperty Name="soortcursu" Relationship="Self.FK__cursus__SOORTCOD__5070F446" FromRole="cursus" ToRole="soortcursus" />
+          <NavigationProperty Name="cursists" Relationship="Self.cursistcursus" FromRole="cursus" ToRole="cursist" />
         </EntityType>
         <EntityType Name="schip">
           <Key>
@@ -203,7 +203,7 @@ warning 6002: The table/view 'dewaai.dbo.cursistcursus' does not have a primary 
           <Property Name="NAAM" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="AVERIJ" Type="Byte" Nullable="false" />
           <Property Name="SOORTCODE" Type="Int32" />
-          <NavigationProperty Name="soortcursus" Relationship="Self.FK__schip__SOORTCODE__571DF1D5" FromRole="schip" ToRole="soortcursus" />
+          <NavigationProperty Name="soortcursu" Relationship="Self.FK__schip__SOORTCODE__571DF1D5" FromRole="schip" ToRole="soortcursus" />
           <NavigationProperty Name="schipklasse" Relationship="Self.schip_shipklasse_klasseid_fk" FromRole="schip" ToRole="schipklasse" />
         </EntityType>
         <EntityType Name="schipklasse">
@@ -212,9 +212,9 @@ warning 6002: The table/view 'dewaai.dbo.cursistcursus' does not have a primary 
           </Key>
           <Property Name="KLASSEID" Type="Int32" Nullable="false" />
           <Property Name="NAAM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="schip" Relationship="Self.schip_shipklasse_klasseid_fk" FromRole="schipklasse" ToRole="schip" />
+          <NavigationProperty Name="schips" Relationship="Self.schip_shipklasse_klasseid_fk" FromRole="schipklasse" ToRole="schip" />
         </EntityType>
-        <EntityType Name="soortcursus">
+        <EntityType Name="soortcursu">
           <Key>
             <PropertyRef Name="SOORTCODE" />
           </Key>
@@ -222,9 +222,9 @@ warning 6002: The table/view 'dewaai.dbo.cursistcursus' does not have a primary 
           <Property Name="CURSUSSOORT" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="PRIJS" Type="Double" />
           <NavigationProperty Name="cursus" Relationship="Self.FK__cursus__SOORTCOD__5070F446" FromRole="soortcursus" ToRole="cursus" />
-          <NavigationProperty Name="schip" Relationship="Self.FK__schip__SOORTCODE__571DF1D5" FromRole="soortcursus" ToRole="schip" />
+          <NavigationProperty Name="schips" Relationship="Self.FK__schip__SOORTCODE__571DF1D5" FromRole="soortcursus" ToRole="schip" />
         </EntityType>
-        <EntityType Name="werknemers">
+        <EntityType Name="werknemer">
           <Key>
             <PropertyRef Name="WERKNEMERID" />
           </Key>
@@ -235,8 +235,8 @@ warning 6002: The table/view 'dewaai.dbo.cursistcursus' does not have a primary 
           <Property Name="TELEFOON" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK__cursus__SOORTCOD__5070F446">
-          <End Role="soortcursus" Type="Self.soortcursus" Multiplicity="0..1" />
-          <End Role="cursus" Type="Self.cursus" Multiplicity="*" />
+          <End Role="soortcursus" Type="Self.soortcursu" Multiplicity="0..1" />
+          <End Role="cursus" Type="Self.cursu" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="soortcursus">
               <PropertyRef Name="SOORTCODE" />
@@ -247,7 +247,7 @@ warning 6002: The table/view 'dewaai.dbo.cursistcursus' does not have a primary 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__schip__SOORTCODE__571DF1D5">
-          <End Role="soortcursus" Type="Self.soortcursus" Multiplicity="0..1" />
+          <End Role="soortcursus" Type="Self.soortcursu" Multiplicity="0..1" />
           <End Role="schip" Type="Self.schip" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="soortcursus">
@@ -271,31 +271,31 @@ warning 6002: The table/view 'dewaai.dbo.cursistcursus' does not have a primary 
           </ReferentialConstraint>
         </Association>
         <Association Name="cursistcursus">
-          <End Role="cursus" Type="Self.cursus" Multiplicity="*" />
+          <End Role="cursus" Type="Self.cursu" Multiplicity="*" />
           <End Role="cursist" Type="Self.cursist" Multiplicity="*" />
         </Association>
         <EntityContainer Name="dewaaiEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="cursist" EntityType="Self.cursist" />
-          <EntitySet Name="cursus" EntityType="Self.cursus" />
-          <EntitySet Name="schip" EntityType="Self.schip" />
-          <EntitySet Name="schipklasse" EntityType="Self.schipklasse" />
-          <EntitySet Name="soortcursus" EntityType="Self.soortcursus" />
-          <EntitySet Name="werknemers" EntityType="Self.werknemers" />
+          <EntitySet Name="cursists" EntityType="Self.cursist" />
+          <EntitySet Name="cursus" EntityType="Self.cursu" />
+          <EntitySet Name="schips" EntityType="Self.schip" />
+          <EntitySet Name="schipklasses" EntityType="Self.schipklasse" />
+          <EntitySet Name="soortcursus" EntityType="Self.soortcursu" />
+          <EntitySet Name="werknemers" EntityType="Self.werknemer" />
           <AssociationSet Name="FK__cursus__SOORTCOD__5070F446" Association="Self.FK__cursus__SOORTCOD__5070F446">
             <End Role="soortcursus" EntitySet="soortcursus" />
             <End Role="cursus" EntitySet="cursus" />
           </AssociationSet>
           <AssociationSet Name="FK__schip__SOORTCODE__571DF1D5" Association="Self.FK__schip__SOORTCODE__571DF1D5">
             <End Role="soortcursus" EntitySet="soortcursus" />
-            <End Role="schip" EntitySet="schip" />
+            <End Role="schip" EntitySet="schips" />
           </AssociationSet>
           <AssociationSet Name="schip_shipklasse_klasseid_fk" Association="Self.schip_shipklasse_klasseid_fk">
-            <End Role="schipklasse" EntitySet="schipklasse" />
-            <End Role="schip" EntitySet="schip" />
+            <End Role="schipklasse" EntitySet="schipklasses" />
+            <End Role="schip" EntitySet="schips" />
           </AssociationSet>
           <AssociationSet Name="cursistcursus" Association="Self.cursistcursus">
             <End Role="cursus" EntitySet="cursus" />
-            <End Role="cursist" EntitySet="cursist" />
+            <End Role="cursist" EntitySet="cursists" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -304,7 +304,7 @@ warning 6002: The table/view 'dewaai.dbo.cursistcursus' does not have a primary 
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="dewaaiModelStoreContainer" CdmEntityContainer="dewaaiEntities">
-          <EntitySetMapping Name="cursist">
+          <EntitySetMapping Name="cursists">
             <EntityTypeMapping TypeName="dewaaiModel.cursist">
               <MappingFragment StoreEntitySet="cursist">
                 <ScalarProperty Name="EMAILADRES" ColumnName="EMAILADRES" />
@@ -318,7 +318,7 @@ warning 6002: The table/view 'dewaai.dbo.cursistcursus' does not have a primary 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="cursus">
-            <EntityTypeMapping TypeName="dewaaiModel.cursus">
+            <EntityTypeMapping TypeName="dewaaiModel.cursu">
               <MappingFragment StoreEntitySet="cursus">
                 <ScalarProperty Name="CURSUSCODE" ColumnName="CURSUSCODE" />
                 <ScalarProperty Name="BEGINDATUM" ColumnName="BEGINDATUM" />
@@ -327,7 +327,7 @@ warning 6002: The table/view 'dewaai.dbo.cursistcursus' does not have a primary 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="schip">
+          <EntitySetMapping Name="schips">
             <EntityTypeMapping TypeName="dewaaiModel.schip">
               <MappingFragment StoreEntitySet="schip">
                 <ScalarProperty Name="NUMMER" ColumnName="NUMMER" />
@@ -338,7 +338,7 @@ warning 6002: The table/view 'dewaai.dbo.cursistcursus' does not have a primary 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="schipklasse">
+          <EntitySetMapping Name="schipklasses">
             <EntityTypeMapping TypeName="dewaaiModel.schipklasse">
               <MappingFragment StoreEntitySet="schipklasse">
                 <ScalarProperty Name="KLASSEID" ColumnName="KLASSEID" />
@@ -347,7 +347,7 @@ warning 6002: The table/view 'dewaai.dbo.cursistcursus' does not have a primary 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="soortcursus">
-            <EntityTypeMapping TypeName="dewaaiModel.soortcursus">
+            <EntityTypeMapping TypeName="dewaaiModel.soortcursu">
               <MappingFragment StoreEntitySet="soortcursus">
                 <ScalarProperty Name="SOORTCODE" ColumnName="SOORTCODE" />
                 <ScalarProperty Name="CURSUSSOORT" ColumnName="CURSUSSOORT" />
@@ -356,7 +356,7 @@ warning 6002: The table/view 'dewaai.dbo.cursistcursus' does not have a primary 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="werknemers">
-            <EntityTypeMapping TypeName="dewaaiModel.werknemers">
+            <EntityTypeMapping TypeName="dewaaiModel.werknemer">
               <MappingFragment StoreEntitySet="werknemers">
                 <ScalarProperty Name="WERKNEMERID" ColumnName="WERKNEMERID" />
                 <ScalarProperty Name="GEBRUIKERSNAAM" ColumnName="GEBRUIKERSNAAM" />
@@ -388,7 +388,7 @@ warning 6002: The table/view 'dewaai.dbo.cursistcursus' does not have a primary 
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

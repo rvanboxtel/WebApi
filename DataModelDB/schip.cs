@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebApi.Models
+namespace DataModelDB
 {
     using System;
     using System.Collections.Generic;
@@ -20,7 +20,7 @@ namespace WebApi.Models
         public byte AVERIJ { get; set; }
         public Nullable<int> SOORTCODE { get; set; }
     
-        public virtual soortcursus soortcursus { get; set; }
+        public virtual soortcursu soortcursu { get; set; }
         public virtual schipklasse schipklasse { get; set; }
     }
 }

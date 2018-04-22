@@ -191,42 +191,9 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\SchipController.cs" />
+    <Compile Include="Controllers\SoortCursusController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Models\cursist.cs">
-      <DependentUpon>ZeilschoolDataModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\cursus.cs">
-      <DependentUpon>ZeilschoolDataModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\schip.cs">
-      <DependentUpon>ZeilschoolDataModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\schipklasse.cs">
-      <DependentUpon>ZeilschoolDataModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\soortcursus.cs">
-      <DependentUpon>ZeilschoolDataModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\werknemers.cs">
-      <DependentUpon>ZeilschoolDataModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ZeilschoolDataModels.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ZeilschoolDataModels.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ZeilschoolDataModels.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ZeilschoolDataModels.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ZeilschoolDataModels.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ZeilschoolDataModels.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -237,16 +204,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\ZeilschoolDataModels.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ZeilschoolDataModels.edmx</DependentUpon>
-      <LastGenOutput>ZeilschoolDataModels.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\ZeilschoolDataModels.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ZeilschoolDataModels.edmx</DependentUpon>
-      <LastGenOutput>ZeilschoolDataModels.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -271,13 +228,6 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\ZeilschoolDataModels.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ZeilschoolDataModels.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ZeilschoolDataModels.edmx.diagram">
-      <DependentUpon>ZeilschoolDataModels.edmx</DependentUpon>
-    </Content>
     <None Include="Properties\PublishProfiles\Zeilschoolwebapi - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -285,7 +235,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -302,6 +254,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -318,6 +271,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataModelDB\DataModelDB.csproj">
+      <Project>{0d964f79-d8a2-479e-bc9b-adfece1ee0d8}</Project>
+      <Name>DataModelDB</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

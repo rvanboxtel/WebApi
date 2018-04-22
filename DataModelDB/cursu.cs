@@ -7,17 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebApi.Models
+namespace DataModelDB
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class cursus
+    public partial class cursu
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public cursus()
+        public cursu()
         {
-            this.cursist = new HashSet<cursist>();
+            this.cursists = new HashSet<cursist>();
         }
     
         public int CURSUSCODE { get; set; }
@@ -25,8 +25,8 @@ namespace WebApi.Models
         public Nullable<System.DateTime> EINDDATUM { get; set; }
         public Nullable<int> SOORTCODE { get; set; }
     
-        public virtual soortcursus soortcursus { get; set; }
+        public virtual soortcursu soortcursu { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<cursist> cursist { get; set; }
+        public virtual ICollection<cursist> cursists { get; set; }
     }
 }
