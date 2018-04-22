@@ -13,44 +13,44 @@ using WebApi.Models;
 
 namespace WebApi.Controllers
 {
-    public class soortcursusController : ApiController
+    public class schipsController : ApiController
     {
         private WebApiContext db = new WebApiContext();
 
-        // GET: api/soortcursus
-        public IQueryable<soortcursus> Getsoortcursus()
+        // GET: api/schips
+        public IQueryable<schip> Getschips()
         {
-            return db.soortcursus;
+            return db.schips;
         }
 
-        // GET: api/soortcursus/5
-        [ResponseType(typeof(soortcursus))]
-        public async Task<IHttpActionResult> Getsoortcursus(int id)
+        // GET: api/schips/5
+        [ResponseType(typeof(schip))]
+        public async Task<IHttpActionResult> Getschip(int id)
         {
-            soortcursus soortcursus = await db.soortcursus.FindAsync(id);
-            if (soortcursus == null)
+            schip schip = await db.schips.FindAsync(id);
+            if (schip == null)
             {
                 return NotFound();
             }
 
-            return Ok(soortcursus);
+            return Ok(schip);
         }
 
-        // PUT: api/soortcursus/5
+        // PUT: api/schips/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> Putsoortcursus(int id, soortcursus soortcursus)
+        public async Task<IHttpActionResult> Putschip(int id, schip schip)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != soortcursus.SOORTCODE)
+            if (id != schip.NUMMER)
             {
                 return BadRequest();
             }
 
-            db.Entry(soortcursus).State = EntityState.Modified;
+            db.Entry(schip).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +58,7 @@ namespace WebApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!soortcursusExists(id))
+                if (!schipExists(id))
                 {
                     return NotFound();
                 }
@@ -71,35 +71,35 @@ namespace WebApi.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/soortcursus
-        [ResponseType(typeof(soortcursus))]
-        public async Task<IHttpActionResult> Postsoortcursus(soortcursus soortcursus)
+        // POST: api/schips
+        [ResponseType(typeof(schip))]
+        public async Task<IHttpActionResult> Postschip(schip schip)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.soortcursus.Add(soortcursus);
+            db.schips.Add(schip);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = soortcursus.SOORTCODE }, soortcursus);
+            return CreatedAtRoute("DefaultApi", new { id = schip.NUMMER }, schip);
         }
 
-        // DELETE: api/soortcursus/5
-        [ResponseType(typeof(soortcursus))]
-        public async Task<IHttpActionResult> Deletesoortcursus(int id)
+        // DELETE: api/schips/5
+        [ResponseType(typeof(schip))]
+        public async Task<IHttpActionResult> Deleteschip(int id)
         {
-            soortcursus soortcursus = await db.soortcursus.FindAsync(id);
-            if (soortcursus == null)
+            schip schip = await db.schips.FindAsync(id);
+            if (schip == null)
             {
                 return NotFound();
             }
 
-            db.soortcursus.Remove(soortcursus);
+            db.schips.Remove(schip);
             await db.SaveChangesAsync();
 
-            return Ok(soortcursus);
+            return Ok(schip);
         }
 
         protected override void Dispose(bool disposing)
@@ -111,9 +111,9 @@ namespace WebApi.Controllers
             base.Dispose(disposing);
         }
 
-        private bool soortcursusExists(int id)
+        private bool schipExists(int id)
         {
-            return db.soortcursus.Count(e => e.SOORTCODE == id) > 0;
+            return db.schips.Count(e => e.NUMMER == id) > 0;
         }
     }
 }

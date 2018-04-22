@@ -13,44 +13,44 @@ using WebApi.Models;
 
 namespace WebApi.Controllers
 {
-    public class soortcursusController : ApiController
+    public class schipklassesController : ApiController
     {
         private WebApiContext db = new WebApiContext();
 
-        // GET: api/soortcursus
-        public IQueryable<soortcursus> Getsoortcursus()
+        // GET: api/schipklasses
+        public IQueryable<schipklasse> Getschipklasses()
         {
-            return db.soortcursus;
+            return db.schipklasses;
         }
 
-        // GET: api/soortcursus/5
-        [ResponseType(typeof(soortcursus))]
-        public async Task<IHttpActionResult> Getsoortcursus(int id)
+        // GET: api/schipklasses/5
+        [ResponseType(typeof(schipklasse))]
+        public async Task<IHttpActionResult> Getschipklasse(int id)
         {
-            soortcursus soortcursus = await db.soortcursus.FindAsync(id);
-            if (soortcursus == null)
+            schipklasse schipklasse = await db.schipklasses.FindAsync(id);
+            if (schipklasse == null)
             {
                 return NotFound();
             }
 
-            return Ok(soortcursus);
+            return Ok(schipklasse);
         }
 
-        // PUT: api/soortcursus/5
+        // PUT: api/schipklasses/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> Putsoortcursus(int id, soortcursus soortcursus)
+        public async Task<IHttpActionResult> Putschipklasse(int id, schipklasse schipklasse)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != soortcursus.SOORTCODE)
+            if (id != schipklasse.KLASSEID)
             {
                 return BadRequest();
             }
 
-            db.Entry(soortcursus).State = EntityState.Modified;
+            db.Entry(schipklasse).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +58,7 @@ namespace WebApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!soortcursusExists(id))
+                if (!schipklasseExists(id))
                 {
                     return NotFound();
                 }
@@ -71,35 +71,35 @@ namespace WebApi.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/soortcursus
-        [ResponseType(typeof(soortcursus))]
-        public async Task<IHttpActionResult> Postsoortcursus(soortcursus soortcursus)
+        // POST: api/schipklasses
+        [ResponseType(typeof(schipklasse))]
+        public async Task<IHttpActionResult> Postschipklasse(schipklasse schipklasse)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.soortcursus.Add(soortcursus);
+            db.schipklasses.Add(schipklasse);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = soortcursus.SOORTCODE }, soortcursus);
+            return CreatedAtRoute("DefaultApi", new { id = schipklasse.KLASSEID }, schipklasse);
         }
 
-        // DELETE: api/soortcursus/5
-        [ResponseType(typeof(soortcursus))]
-        public async Task<IHttpActionResult> Deletesoortcursus(int id)
+        // DELETE: api/schipklasses/5
+        [ResponseType(typeof(schipklasse))]
+        public async Task<IHttpActionResult> Deleteschipklasse(int id)
         {
-            soortcursus soortcursus = await db.soortcursus.FindAsync(id);
-            if (soortcursus == null)
+            schipklasse schipklasse = await db.schipklasses.FindAsync(id);
+            if (schipklasse == null)
             {
                 return NotFound();
             }
 
-            db.soortcursus.Remove(soortcursus);
+            db.schipklasses.Remove(schipklasse);
             await db.SaveChangesAsync();
 
-            return Ok(soortcursus);
+            return Ok(schipklasse);
         }
 
         protected override void Dispose(bool disposing)
@@ -111,9 +111,9 @@ namespace WebApi.Controllers
             base.Dispose(disposing);
         }
 
-        private bool soortcursusExists(int id)
+        private bool schipklasseExists(int id)
         {
-            return db.soortcursus.Count(e => e.SOORTCODE == id) > 0;
+            return db.schipklasses.Count(e => e.KLASSEID == id) > 0;
         }
     }
 }
