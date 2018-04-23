@@ -200,6 +200,7 @@
     <Compile Include="Controllers\schipklassesController.cs" />
     <Compile Include="Controllers\schipsController.cs" />
     <Compile Include="Controllers\soortcursusController.cs" />
+    <Compile Include="Controllers\werknemersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -207,6 +208,7 @@
     <Compile Include="Models\schipklasses.cs" />
     <Compile Include="Models\soortcursus.cs" />
     <Compile Include="Models\WebApiContext.cs" />
+    <Compile Include="Models\werknemers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
