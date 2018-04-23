@@ -72,21 +72,28 @@ namespace WebApi.Controllers
         }
 
         // POST: api/schips
-        [ResponseType(typeof(schips))]
-        [HttpPost]
-        public async Task<IHttpActionResult> Postschips(schips schips)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //[ResponseType(typeof(schips))]
+        //[HttpPost]
+        //public async Task<IHttpActionResult> Postschips(schips schips)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
+        //    db.schip.Add(schips);
+        //    await db.SaveChangesAsync();
+
+        //    return CreatedAtRoute("DefaultApi", new { id = schips.NUMMER }, schips);
+        //}
+        // POST api/values
+        [HttpPost]
+        public async Task Post([FromBody]schips value)
+        {
             db.schip.Add(schips);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = schips.NUMMER }, schips);
         }
-
         // DELETE: api/schips/5
         [ResponseType(typeof(schips))]
         public async Task<IHttpActionResult> Deleteschips(int id)
