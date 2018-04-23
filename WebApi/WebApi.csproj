@@ -200,8 +200,6 @@
     <Compile Include="Controllers\schipklassesController.cs" />
     <Compile Include="Controllers\schipsController.cs" />
     <Compile Include="Controllers\soortcursusController.cs" />
-    <Compile Include="Dao\DbContext.cs" />
-    <Compile Include="Dao\Quary.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

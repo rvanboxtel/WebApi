@@ -10,39 +10,30 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WebApi.Models;
-using WebApi.Dao;
 
 namespace WebApi.Controllers
 {
     public class schipsController : ApiController
     {
         private WebApiContext db = new WebApiContext();
-        public const string DatabaseConnectionString = "Data Source=tcp:zeilschooldewaai20180416022428dbserver.database.windows.net,1433;Initial Catalog=dewaai;User ID=development;Password=Gian_2002;Timeout=60;";
 
-        // Create a new db context (db connection)
-        private readonly Dao.DbContext _context = new Dao.DbContext(DatabaseConnectionString);
         // GET: api/schips
         public IQueryable<schips> Getschip()
         {
             return db.schip;
         }
 
-        //// GET: api/schips/5
-        //[ResponseType(typeof(schips))]
-        //public async Task<IHttpActionResult> Getschips(int id)
-        //{
-        //    schips schips = await db.schip.FindAsync(id);
-        //    if (schips == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return Ok(schips);
-        //}
-        [HttpGet]
-        public async Task<schips> Get(int id)
+        // GET: api/schips/5
+        [ResponseType(typeof(schips))]
+        public async Task<IHttpActionResult> Getschips(int id)
         {
-            return await new Query<schips>(_context).Read(id);
+            schips schips = await db.schip.FindAsync(id);
+            if (schips == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(schips);
         }
 
         // PUT: api/schips/5
@@ -81,28 +72,20 @@ namespace WebApi.Controllers
         }
 
         // POST: api/schips
-        //[ResponseType(typeof(schips))]
-        //[HttpPost]
-        //public async Task<IHttpActionResult> Postschips(schips schips)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    db.schip.Add(schips);
-        //    await db.SaveChangesAsync();
-
-        //    return CreatedAtRoute("DefaultApi", new { id = schips.NUMMER }, schips);
-        //}
-        // POST api/values
-        [HttpPost]
-        public async Task Post([FromBody]schips value)
+        [ResponseType(typeof(schips))]
+        public async Task<IHttpActionResult> Postschips(schips schips)
         {
-            db.schip.Add(value);
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
+
+            db.schip.Add(schips);
             await db.SaveChangesAsync();
 
+            return CreatedAtRoute("DefaultApi", new { id = schips.NUMMER }, schips);
         }
+
         // DELETE: api/schips/5
         [ResponseType(typeof(schips))]
         public async Task<IHttpActionResult> Deleteschips(int id)
