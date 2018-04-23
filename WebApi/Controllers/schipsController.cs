@@ -90,7 +90,7 @@ namespace WebApi.Controllers
         [HttpPost]
         public async Task Post([FromBody]schips value)
         {
-            db.schip.Add(schips);
+            db.schip.Add(value);
             await db.SaveChangesAsync();
 
         }
