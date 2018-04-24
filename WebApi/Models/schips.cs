@@ -14,11 +14,12 @@ namespace WebApi.Models
     [Table("schips")]
     public partial class schips
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Key]
         public virtual int NUMMER { get; set; }
         public virtual int KLASSE { get; set; }
         public virtual string NAAM { get; set; }
-        public virtual Boolean AVERIJ { get; set; }
+        public virtual bool AVERIJ { get; set; }
         public virtual int SOORTCODE { get; set; }
     }
 }

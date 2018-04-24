@@ -1,8 +1,6 @@
-﻿using Dapper;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -11,7 +9,6 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using System.Web.Mvc;
 using WebApi.Models;
 
 namespace WebApi.Controllers
@@ -19,7 +16,6 @@ namespace WebApi.Controllers
     public class schipsController : ApiController
     {
         private WebApiContext db = new WebApiContext();
-        private DbConnection _connection;
 
         // GET: api/schips
         public IQueryable<schips> Getschip()
@@ -76,26 +72,27 @@ namespace WebApi.Controllers
         }
 
         // POST: api/schips
-        public ActionResult Create()
-        {
-            return View();
-        }
-
         [HttpPost]
-        public ActionResult Create(SchipsViewModel model)
+        public async Task<IHttpActionResult> Postschips(schips schips)
         {
-            if (ModelState.IsValid)
+
+            if (!ModelState.IsValid)
             {
-                using (_connection = Utilities.GetOpenConnection())
-                {
-                    _connection.Insert(model);
-                }
-                return RedirectToAction("index");
+                return BadRequest(ModelState);
             }
-            return View(model);
+            try
+            {
+                db.schip.Add(schips);
+                await db.SaveChangesAsync();
+
+                return CreatedAtRoute("DefaultApi", new { id = schips.NUMMER }, schips);
+            }
+            catch (Exception e)
+            {
+                return Ok(e);
+            }
+
         }
-
-
 
         // DELETE: api/schips/5
         [ResponseType(typeof(schips))]

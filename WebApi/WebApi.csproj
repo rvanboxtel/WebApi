@@ -207,11 +207,9 @@
     <Compile Include="Models\schips.cs" />
     <Compile Include="Models\schipklasses.cs" />
     <Compile Include="Models\soortcursus.cs" />
-    <Compile Include="Models\schipsViewModel.cs" />
     <Compile Include="Models\WebApiContext.cs" />
     <Compile Include="Models\werknemers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
