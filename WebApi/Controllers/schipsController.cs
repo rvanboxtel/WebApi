@@ -72,20 +72,40 @@ namespace WebApi.Controllers
         }
 
         // POST: api/schips
-        [ResponseType(typeof(schips))]
-        public async Task<IHttpActionResult> Postschips(schips schips)
+        //[ResponseType(typeof(schips))]
+        //public async Task<IHttpActionResult> Postschips(schips schips)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+        //    return Request.CreateResponse(schips);
+        //    //db.schip.Add(schips);
+        //    //await db.SaveChangesAsync();
+
+        //    //return CreatedAtRoute("DefaultApi", new { id = schips.NUMMER }, schips);
+        //}
+         public HttpResponseMessage Postschips([FromBody] schips schip)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return BadRequest(ModelState);
-            //}
+            try
+            {
+                using (WebApiContext db = new WebApiContext())
+                {
+                    db.schip.Add(schip);
+                    db.SaveChanges();
 
-            db.schip.Add(schips);
-            await db.SaveChangesAsync();
+                    var message = Request.CreateResponse(HttpStatusCode.Created, schip);
+                    message.Headers.Location = new Uri(Request.RequestUri + schip.NUMMER.ToString());
+                    return message;
+                }
+            }
+            catch (Exception ex)
+            {
 
-            return CreatedAtRoute("DefaultApi", new { id = schips.NUMMER }, schips);
+               return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+               
+            }
         }
-
         // DELETE: api/schips/5
         [ResponseType(typeof(schips))]
         public async Task<IHttpActionResult> Deleteschips(int id)
