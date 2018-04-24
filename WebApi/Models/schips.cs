@@ -22,4 +22,17 @@ namespace WebApi.Models
         public virtual bool AVERIJ { get; set; }
         public virtual int SOORTCODE { get; set; }
     }
+    /// <summary>
+    /// A class which represents the schips table.
+    /// </summary>
+    [Table("schips")]
+    public class viewschips
+    {
+        [Key]
+        public int NUMMER { get; set; }
+        public int KLASSE { get; set; }
+        public string NAAM { get; set; }
+        public bool AVERIJ { get; set; }
+        public int SOORTCODE { get; set; }
+    }
 }

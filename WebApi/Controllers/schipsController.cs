@@ -18,16 +18,16 @@ namespace WebApi.Controllers
         private WebApiContext db = new WebApiContext();
 
         // GET: api/schips
-        public IQueryable<schips> Getschip()
+        public IQueryable<viewschips> Getschip()
         {
-            return db.schip;
+            return db.vschip;
         }
 
         // GET: api/schips/5
         [ResponseType(typeof(schips))]
         public async Task<IHttpActionResult> Getschips(int id)
         {
-            schips schips = await db.schip.FindAsync(id);
+            viewschips schips = await db.vschip.FindAsync(id);
             if (schips == null)
             {
                 return NotFound();
