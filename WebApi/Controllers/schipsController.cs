@@ -72,40 +72,32 @@ namespace WebApi.Controllers
         }
 
         // POST: api/schips
-        //[ResponseType(typeof(schips))]
-        //public async Task<IHttpActionResult> Postschips(schips schips)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-        //    return Request.CreateResponse(schips);
-        //    //db.schip.Add(schips);
-        //    //await db.SaveChangesAsync();
-
-        //    //return CreatedAtRoute("DefaultApi", new { id = schips.NUMMER }, schips);
-        //}
-         public HttpResponseMessage Postschips([FromBody] schips schip)
+        [ResponseType(typeof(schips))]
+        public async Task<IHttpActionResult> PostBook(schips schip)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                using (WebApiContext db = new WebApiContext())
-                {
-                    db.schip.Add(schip);
-                    db.SaveChanges();
-
-                    var message = Request.CreateResponse(HttpStatusCode.Created, schip);
-                    message.Headers.Location = new Uri(Request.RequestUri + schip.NUMMER.ToString());
-                    return message;
-                }
+                return BadRequest(ModelState);
             }
-            catch (Exception ex)
+
+            db.schip.Add(schip);
+            await db.SaveChangesAsync();
+
+            // Load schips name
+            db.Entry(schip).Reference(x => x.NAAM).Load();
+
+            var dto = new schips()
             {
+                NUMMER = schip.NUMMER,
+                KLASSE = schip.KLASSE,
+                NAAM = schip.NAAM,
+                AVERIJ = schip.AVERIJ,
+                SOORTCODE = schip.SOORTCODE
+            };
 
-               return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
-               
-            }
+            return CreatedAtRoute("DefaultApi", new { id = schip.NUMMER }, dto);
         }
+
         // DELETE: api/schips/5
         [ResponseType(typeof(schips))]
         public async Task<IHttpActionResult> Deleteschips(int id)
