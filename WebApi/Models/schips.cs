@@ -15,8 +15,7 @@ namespace WebApi.Models
     public partial class schips
     {
         [Key]
-        [Column("NUMMER")]
-        public virtual int ID { get; set; }
+        public virtual int NUMMER { get; set; }
         public virtual int KLASSE { get; set; }
         public virtual string NAAM { get; set; }
         public virtual Boolean AVERIJ { get; set; }
