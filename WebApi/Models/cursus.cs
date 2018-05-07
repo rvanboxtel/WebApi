@@ -12,5 +12,6 @@ namespace WebApi.Models
         public DateTime BEGINDATUM { get; set; }
         public DateTime EINDDATUM { get; set; }
         public int SOORTCODE { get; set; }
+        public Double PRIJS { get; set; }
     }
 }

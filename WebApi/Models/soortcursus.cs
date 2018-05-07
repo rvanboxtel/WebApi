@@ -14,6 +14,6 @@ namespace WebApi.Models
         [Key]
         public int SOORTCODE { get; set; }
         public string CURSUSSOORT { get; set; }
-        public Double PRIJS { get; set; }
+        
     }
 }
