@@ -10,6 +10,7 @@ namespace WebApi.Models
 {
     public class cursistcursus
     {
+
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Key]
         public int CURSUSCODE { get; set; }
