@@ -8,12 +8,11 @@ using System.Threading.Tasks;
 
 namespace WebApi.Models
 {
-    public class soortcursus
+    public class cursistcursus
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Key]
-        public int SOORTCODE { get; set; }
-        public string CURSUSSOORT { get; set; }
-        public Double PRIJS { get; set; }
+        public int CURSUSCODE { get; set; }
+        public string EMAILADRES { get; set; }
     }
 }

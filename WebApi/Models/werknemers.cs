@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace WebApi.Models
 {
     public class werknemers
     {
-        
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int WERKNEMERID { get; set; }
         [Key]
         public string GEBRUIKERSNAAM { get; set; }

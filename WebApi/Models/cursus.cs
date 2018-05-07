@@ -1,19 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WebApi.Models
 {
-    public class soortcursus
+    public class cursus
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Key]
+        public int CURSUSCODE { get; set; }
+        public DateTime BEGINDATUM { get; set; }
+        public DateTime EINDDATUM { get; set; }
         public int SOORTCODE { get; set; }
-        public string CURSUSSOORT { get; set; }
-        public Double PRIJS { get; set; }
     }
 }

@@ -26,5 +26,9 @@ namespace WebApi.Models
         public System.Data.Entity.DbSet<WebApi.Models.schipklasses> schipklasse { get; set; }
 
         public System.Data.Entity.DbSet<WebApi.Models.werknemers> werknemers { get; set; }
+
+        public System.Data.Entity.DbSet<WebApi.Models.cursus> cursus { get; set; }
+
+        public System.Data.Entity.DbSet<WebApi.Models.cursistcursus> cursistcursus { get; set; }
     }
 }
